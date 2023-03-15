@@ -1,6 +1,5 @@
 # What does this piece of code do?
-# Answer:Random numbers greater than 70, but less than 100
-
+# Answer:Progress is the loop variable for the entire body of the loop, which is 0 to 9 for 10 times. n is a random number. A number between 1 and 100 is selected at random and reserved for comparison. In the ten random results, the largest number will be compared and output.
 # Import libraries
 # randint allows drawing a random number,
 # e.g. randint(1,5) draws a number between 1 and 5
