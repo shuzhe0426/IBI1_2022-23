@@ -1,2 +1,4 @@
-I found that the command push is always failed, when I try t transfer the file in my computer to the github.
+I found that the command push is always failed, when I try to transfer the file in my computer to the github.
 Also, I do try make the theme of my webpage, but failed. It makes me very sad and I don't know what can I do.
+Ohh, but now, I succeeded in solving these problems!
+Yeah!!!
