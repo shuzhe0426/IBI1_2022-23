@@ -4,6 +4,7 @@ sum=2
 #n means the generation
 n=1
 #set a while-loop
+#the total sum should less than 100
 while sum<100:
     print("The number of ",n,"th generation births is ",sum)
     sum*=2
