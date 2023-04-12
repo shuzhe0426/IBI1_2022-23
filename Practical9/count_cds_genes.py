@@ -9,47 +9,40 @@ stop_codon = input("Please enter a stop codon (TAA/TAG/TGA): ").upper()
 output_file = f"{stop_codon}_stop_genes.fa"
 
 # Open input and output files
-input_file = open("Saccharomyces_cerevisiae.R64-1-1.cdna.all.fa", "r")
-output_file = open(output_file, "w")
+
 
 # Define regular expression pattern to match gene name
 # This assumes that the name is contained in the string after the first whitespace character
 gene_name_pattern = re.compile(r'^>\s*(\S+)')
 
 # Initialize variables
-gene_seq = ""
-gene_name = ""
+gene_seq = ''
+gene_name = ''
 gene_count = 0
 total_count = 0
+# Open input and output files
+input_file = open("Saccharomyces_cerevisiae.R64-1-1.cdna.all.fa", "r")
+output_file = open(output_file, "w")
 
 # Iterate over input file
 for line in input_file:
+    # For the line starting with ">", get the matching gebe name
     if line.startswith(">"):
-        # Check if previous gene sequence had the given stop codon
-        if gene_seq.endswith(stop_codon):
-            # Write gene information to output file
-            output_file.write(f">{gene_name} ({gene_count})\n{gene_seq}\n")
-            total_count += gene_count
-
-        # Initialize variables for new gene
-        gene_seq = ""
-        gene_count = 0
-        gene_name = gene_name_pattern.search(line).group(1)
+        gene_name = gene_name_pattern.search(line).group()
+        gene_seq = ''
+    # Update the sequence, or it will gather wrong sequences
     else:
+        gene_seq += line.strip() # Remove line breaks and add to gene sequence
         # Count number of instances of stop codon in current line
-        gene_count += line.count(stop_codon)
-        # Remove line breaks and add to gene sequence
-        gene_seq += line.strip()
-
-# Check if last gene sequence had the given stop codon
-if gene_seq.endswith(stop_codon):
-    # Write gene information to output file
-    output_file.write(f">{gene_name} ({gene_count})\n{gene_seq}\n")
-    total_count += gene_count
+        if re.compile(r'{}$'.format(stop_codon)).search(gene_seq):
+            gene_count=len(re.findall(r'{}'.format(stop_codon),gene_seq))
+            # Put gene name, possible sequence number, gene sequence into output file
+            output_file.write('{}\n{}\n{}\n'.format(gene_name,gene_count,gene_seq))
+    total_count += gene_count  # The total number is the sum of each sequence number.
 
 # Print total count of coding sequences with given stop codon
 print(f"Total coding sequences with {stop_codon}: {total_count}")
 
-#Close input and output files
+# Close input and output files
 input_file.close()
 output_file.close()
