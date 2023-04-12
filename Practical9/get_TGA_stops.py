@@ -1,5 +1,6 @@
 import re
 
+# Read the
 input_file = 'Saccharomyces_cerevisiae.R64-1-1.cdna.all.fa'
 output_file = 'TGA_genes.fa'
 
@@ -15,6 +16,8 @@ TGA_pattern = re.compile(r'TGA$')
 with open(input_file, 'r') as f_in, open(output_file, 'w') as f_out:
     current_gene_name = ''
     current_sequence = ''
+
+# In each line of the file, determine exactly what you want to type
     for line in f_in:
         if line.startswith('>'):
             # If we encounter a new gene name, check if the previous sequence matched the TGA pattern
@@ -30,5 +33,3 @@ with open(input_file, 'r') as f_in, open(output_file, 'w') as f_out:
     # Check the final sequence after the end of the file
     if current_gene_name and TGA_pattern.search(current_sequence):
         f_out.write('>{}\n{}\n'.format(current_gene_name, current_sequence))
-
-print(gene_name_pattern)

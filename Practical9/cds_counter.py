@@ -1,19 +1,19 @@
+
 import re
 
-seq = 'ATGCAATCGACTACGATCTGAGAGGGCCTAA'
+seq = 'ATGCAATCGACTACGATCTGAGAGGGCCTAAATGCAATCGACTACGATCTGAGAGGGCCTAAATGCAATCGACTACGATCTGAGAGGGCCTAA'
 
-codon_count = 0
+start_codon = 'ATG'
+stop_codon = ['TAA', 'TAG', 'TGA']
 
-# Look for start codon 'ATG' followed by stop codon 'TAA'
-if re.search('ATG.*TAA', seq):
-    codon_count += 1
+possible_sequences = 0
 
-# Look for start codon 'ATG' followed by stop codon 'TAG'
-if re.search('ATG.*TAG', seq):
-    codon_count += 1
+match = re.search(start_codon, seq) # search for start codon
 
-# Look for start codon 'ATG' followed by stop codon 'TGA'
-if re.search('ATG.*TGA', seq):
-    codon_count += 1
+if match: # if start codon is found
+    sub_seq = seq[match.end():] # take a sub-sequence after the start codon
+    for codon in stop_codon:
+        matches = re.findall(codon, sub_seq) # count number of stop codons in the sub-sequence
+        possible_sequences += len(matches) # add the count to possible sequences
 
-print(f"Possible coding sequences: {codon_count}")
+print('Total possible coding sequences:', possible_sequences)
