@@ -3,6 +3,7 @@ import re
 
 seq = 'ATGCAATCGACTACGATCTGAGAGGGCCTAA'
 
+# Define the start condon and stop condon
 start_codon = 'ATG'
 stop_codon = ['TAA', 'TAG', 'TGA']
 

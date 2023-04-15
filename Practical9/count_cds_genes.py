@@ -37,7 +37,7 @@ for line in input_file:
         if re.compile(r'{}$'.format(stop_codon)).search(gene_seq):
             gene_count=len(re.findall(r'{}'.format(stop_codon),gene_seq))
             # Put gene name, possible sequence number, gene sequence into output file
-            output_file.write('{}\n{}\n{}\n'.format(gene_name,gene_count,gene_seq))
+            output_file.write(f"{gene_name} {gene_count}\n{gene_seq}\n")
     total_count += gene_count  # The total number is the sum of each sequence number.
 
 # Print total count of coding sequences with given stop codon
