@@ -4,6 +4,8 @@ c=116.39
 d=a-b
 e=c-a
 if d>e:
- print("Los Angeles")
+# Rob travels further to LA
+ print("Los Angeles") # print out the result
 if d<e:
- print("Haining")
+# Rob travels further to Haining
+ print("Haining") # print out the result
